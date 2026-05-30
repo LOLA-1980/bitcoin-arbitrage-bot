@@ -1,43 +1,115 @@
+# ⚡ Bitcoin Arbitrage Trading Bot
 
-# Bitcoin Arbitrage Bot
+Real-time Bitcoin arbitrage simulation system that monitors multiple exchanges, detects price inefficiencies, and executes simulated trading operations with profit tracking in real time.
 
-Intelligent Bitcoin arbitrage platform with real-time exchange monitoring, profitability analysis, and trade simulation.
+---
 
-## Overview
+## 🚀 Features
 
-This project was developed for the Coding Challenge Mexico 2026.
+- 🔴 Real-time BTC price monitoring (Binance & Kraken)
+- ⚡ Arbitrage opportunity detection engine
+- 💰 Simulated trade execution with fees included
+- 📊 Live wallet tracking (USD / BTC / PnL)
+- 📈 Trade history visualization
+- 📉 Profit evolution chart (Recharts)
+- 🔄 Auto-refreshing dashboard (real-time simulation)
+- 🎯 Net profit calculation with trading fees
 
-The platform monitors Bitcoin prices across multiple cryptocurrency exchanges, detects arbitrage opportunities in real time, evaluates profitability after fees and execution costs, and simulates trading operations through a web-based dashboard.
+---
 
-## Features
+## 🧠 System Architecture
 
-- Real-time BTC market monitoring
-- Arbitrage opportunity detection
-- Profitability calculation
-- Trade execution simulation
-- Performance tracking and analytics
-- Responsive web dashboard
+### Backend (Flask)
+- REST API for market data
+- Arbitrage detection engine
+- Trade simulation system
+- Wallet state management
+- Exchange integrations via public APIs
 
-## Tech Stack
+### Frontend (React)
+- Real-time trading dashboard
+- Live wallet metrics
+- Opportunity tracker
+- Trade history module
+- Profit chart visualization
 
-### Frontend
+---
+
+## 🔄 How It Works
+
+1. The system fetches BTC prices from multiple exchanges
+2. It compares bid/ask differences in real time
+3. Calculates net profit after fees
+4. Detects arbitrage opportunities
+5. Executes simulated trades
+6. Updates wallet balance and trade history
+7. Frontend renders live system state
+
+---
+
+## 📊 Tech Stack
+
+**Frontend**
 - React
-- Vite
+- Tailwind CSS
+- Recharts
+
+**Backend**
+- Flask
+- Python
+- Requests
+- Flask-CORS
+
+---
+
+## 📡 API Endpoints
+
+- `GET /api/prices`  
+  Returns live BTC prices from supported exchanges
+
+- `GET /api/arbitrage`  
+  Detects arbitrage opportunities and simulates trade execution
+
+- `GET /api/history`  
+  Returns wallet state and historical trades
+
+---
+
+
+## ⚙️ Setup Instructions
 
 ### Backend
-- Python
-- Flask
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate  # Windows
+pip install -r requirements.txt
+python app.py
 
-### Deployment
-- TBD
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
 
-## Project Structure
 
-```txt
-frontend/
-backend/
-```
+## 📈 Example Output
 
-## Status
+- Detects price differences between exchanges in real time  
+- Executes simulated arbitrage trades  
+- Updates wallet balance dynamically  
+- Tracks cumulative profit over time  
+- Displays live trading activity in the UI  
 
-🚧 In Development - Coding Challenge Mexico 2026
+---
+
+## 🎯 Goal of the Project
+
+To simulate a high-frequency arbitrage trading system capable of detecting and reacting to inefficiencies in cryptocurrency markets in real time, including fee-aware profit calculation and automated execution logic.
+
+---
+
+## 🧑‍💻 Author
+
+Built for Coding Challenge Mexico — Arbitrage Trading System
+
