@@ -6,20 +6,23 @@ import TradeHistory from "../components/TradeHistory"
 
 export default function Dashboard() {
   const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const fetchData = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/arbitrage")
       const json = await res.json()
       setData(json)
+      setLoading(false)
     } catch (err) {
       console.log(err)
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     fetchData()
-    const interval = setInterval(fetchData, 2000)
+    const interval = setInterval(fetchData, 2000) // 👈 PERFECTO PARA DEMO
     return () => clearInterval(interval)
   }, [])
 
@@ -27,28 +30,46 @@ export default function Dashboard() {
   const trade = execution?.trade_executed
   const wallet = execution?.wallet
   const opportunity = data?.opportunity
-  const history = wallet?.history || []
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <p className="text-green-400 text-xl animate-pulse">
+          Connecting Arbitrage Engine...
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
 
       {/* HEADER */}
-      <h1 className="text-3xl font-bold text-green-400 mb-6">
-        ⚡ Bitcoin Arbitrage Engine LIVE
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold text-green-400">
+          ⚡ Bitcoin Arbitrage Engine LIVE
+        </h1>
+
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-green-400 text-sm">LIVE</span>
+        </div>
+      </div>
 
       {/* CARDS */}
       <StatsCards wallet={wallet} trade={trade} />
 
       {/* OPPORTUNITIES */}
-      <OpportunitiesTable opportunity={opportunity} />
+      <div className="mt-6">
+        <OpportunitiesTable opportunity={opportunity} />
+      </div>
 
       {/* LAST TRADE */}
-      <div className="bg-black border border-gray-800 p-4 rounded-xl mb-6">
-        <h2 className="text-lg font-bold mb-2">Last Trade</h2>
+      <div className="bg-black border border-gray-800 p-4 rounded-xl mb-6 mt-6">
+        <h2 className="text-lg font-bold mb-2 text-white">Last Trade</h2>
 
         {trade ? (
-          <div>
+          <div className="space-y-1">
             <p>BUY → {trade.buy_exchange}</p>
             <p>SELL → {trade.sell_exchange}</p>
             <p className="text-green-400 font-bold">
@@ -61,7 +82,9 @@ export default function Dashboard() {
       </div>
 
       {/* CHART */}
-      <ProfitChart history={wallet?.history || []} />
+      <div className="mt-6">
+        <ProfitChart history={wallet?.history || []} />
+      </div>
 
       {/* HISTORY */}
       <div className="mt-6">

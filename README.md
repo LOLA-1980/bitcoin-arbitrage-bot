@@ -1,5 +1,9 @@
 # ⚡ Bitcoin Arbitrage Trading Bot
 
+![status](https://img.shields.io/badge/status-live-brightgreen)
+![backend](https://img.shields.io/badge/backend-flask-blue)
+![frontend](https://img.shields.io/badge/frontend-react-61dafb)
+
 Real-time Bitcoin arbitrage simulation system that monitors multiple exchanges, detects price inefficiencies, and executes simulated trading operations with profit tracking in real time.
 
 ---
@@ -16,6 +20,15 @@ Real-time Bitcoin arbitrage simulation system that monitors multiple exchanges, 
 - 🎯 Net profit calculation with trading fees
 
 ---
+
+
+## 🟢 Live System Status
+
+- Market data: ACTIVE
+- Arbitrage engine: RUNNING
+- Simulation engine: ACTIVE
+- Wallet tracking: LIVE
+
 
 ## 🧠 System Architecture
 
