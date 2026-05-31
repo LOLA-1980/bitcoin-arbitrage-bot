@@ -4,125 +4,303 @@
 ![backend](https://img.shields.io/badge/backend-flask-blue)
 ![frontend](https://img.shields.io/badge/frontend-react-61dafb)
 
-Real-time Bitcoin arbitrage simulation system that monitors multiple exchanges, detects price inefficiencies, and executes simulated trading operations with profit tracking in real time.
+Real-time Bitcoin arbitrage simulation platform that monitors multiple cryptocurrency exchanges, detects price inefficiencies, evaluates profitability after fees, and simulates automated trading operations through an interactive web dashboard.
+
+---
+
+## 📸 Dashboard Preview
+
+![Dashboard Screenshot](./screenshots/dashboard.png)
 
 ---
 
 ## 🚀 Features
 
-- 🔴 Real-time BTC price monitoring (Binance & Kraken)
+- 🔴 Real-time BTC market monitoring
+- 🌐 Multi-exchange integration (Binance & Kraken)
 - ⚡ Arbitrage opportunity detection engine
-- 💰 Simulated trade execution with fees included
-- 📊 Live wallet tracking (USD / BTC / PnL)
-- 📈 Trade history visualization
-- 📉 Profit evolution chart (Recharts)
-- 🔄 Auto-refreshing dashboard (real-time simulation)
-- 🎯 Net profit calculation with trading fees
+- 💰 Fee-aware profit calculation
+- 🤖 Simulated trade execution
+- 📊 Virtual wallet management
+- 📈 Profit evolution chart
+- 📜 Historical trade tracking
+- 🔄 Auto-refresh dashboard updates
+- 🎯 Real-time market opportunity visualization
 
 ---
 
-
 ## 🟢 Live System Status
 
-- Market data: ACTIVE
-- Arbitrage engine: RUNNING
-- Simulation engine: ACTIVE
-- Wallet tracking: LIVE
+| Component | Status |
+|------------|---------|
+| Market Data Feed | ✅ Active |
+| Arbitrage Engine | ✅ Running |
+| Trade Simulator | ✅ Running |
+| Wallet Tracker | ✅ Live |
+| Dashboard | ✅ Live |
 
+---
 
 ## 🧠 System Architecture
 
-### Backend (Flask)
-- REST API for market data
-- Arbitrage detection engine
-- Trade simulation system
-- Wallet state management
-- Exchange integrations via public APIs
-
-### Frontend (React)
-- Real-time trading dashboard
-- Live wallet metrics
-- Opportunity tracker
-- Trade history module
-- Profit chart visualization
+```text
+React Dashboard
+        │
+        ▼
+ Flask REST API
+        │
+        ▼
+ Arbitrage Engine
+        │
+        ▼
+ Exchange APIs
+(Binance + Kraken)
+        │
+        ▼
+ Trade Simulator
+        │
+        ▼
+ Wallet + Trade History
+```
 
 ---
 
 ## 🔄 How It Works
 
-1. The system fetches BTC prices from multiple exchanges
-2. It compares bid/ask differences in real time
-3. Calculates net profit after fees
-4. Detects arbitrage opportunities
-5. Executes simulated trades
-6. Updates wallet balance and trade history
-7. Frontend renders live system state
+1. Fetches BTC prices from Binance and Kraken.
+2. Compares prices across exchanges.
+3. Detects arbitrage opportunities.
+4. Calculates expected profit after trading fees.
+5. Simulates buy and sell execution.
+6. Updates wallet balances.
+7. Stores operation history.
+8. Displays results in the dashboard.
+
+---
+
+## 📊 Dashboard Modules
+
+### 💼 Wallet Overview
+
+Displays:
+
+- USD Balance
+- BTC Balance
+- Total Profit (PnL)
+
+### 📡 Live Market Prices
+
+Displays:
+
+- Binance BTC Price
+- Kraken BTC Price
+
+### ⚡ Arbitrage Opportunity Tracker
+
+Shows:
+
+- Best exchange to buy from
+- Best exchange to sell to
+- Estimated profit
+
+### 🤖 Last Executed Trade
+
+Displays:
+
+- Buy exchange
+- Sell exchange
+- Profit generated
+
+### 📈 Profit Evolution Chart
+
+Interactive chart showing profit performance over time.
+
+### 📜 Trade History
+
+Complete log of simulated trades including:
+
+- Buy exchange
+- Sell exchange
+- BTC amount
+- Profit generated
 
 ---
 
 ## 📊 Tech Stack
 
-**Frontend**
+### Frontend
+
 - React
 - Tailwind CSS
 - Recharts
 
-**Backend**
-- Flask
+### Backend
+
 - Python
-- Requests
+- Flask
 - Flask-CORS
+- Requests
+
+### Market Data
+
+- Binance Public API
+- Kraken Public API
 
 ---
 
 ## 📡 API Endpoints
 
-- `GET /api/prices`  
-  Returns live BTC prices from supported exchanges
+### GET /api/prices
 
-- `GET /api/arbitrage`  
-  Detects arbitrage opportunities and simulates trade execution
+Returns current BTC prices from connected exchanges.
 
-- `GET /api/history`  
-  Returns wallet state and historical trades
+Example:
+
+```json
+{
+  "binance": {
+    "exchange": "Binance",
+    "price": 74100.21
+  },
+  "kraken": {
+    "exchange": "Kraken",
+    "price": 74082.33
+  }
+}
+```
 
 ---
 
+### GET /api/arbitrage
+
+Returns:
+
+- Current prices
+- Best arbitrage opportunity
+- Simulated execution result
+- Wallet state
+
+---
+
+### GET /api/history
+
+Returns:
+
+- Historical trades
+- Total accumulated profit
+
+---
+
+## 💰 Profit Calculation
+
+The system evaluates opportunities after considering trading fees.
+
+Formula:
+
+```text
+Net Profit =
+(Sell Price - Sell Fee)
+-
+(Buy Price + Buy Fee)
+```
+
+Only profitable opportunities are executed.
+
+---
 
 ## ⚙️ Setup Instructions
 
 ### Backend
+
 ```bash
 cd backend
+
 python -m venv venv
-venv\Scripts\activate  # Windows
+
+venv\Scripts\activate
+
 pip install -r requirements.txt
+
 python app.py
+```
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
+Backend runs on:
 
-
-## 📈 Example Output
-
-- Detects price differences between exchanges in real time  
-- Executes simulated arbitrage trades  
-- Updates wallet balance dynamically  
-- Tracks cumulative profit over time  
-- Displays live trading activity in the UI  
+```text
+http://localhost:5000
+```
 
 ---
 
-## 🎯 Goal of the Project
+### Frontend
 
-To simulate a high-frequency arbitrage trading system capable of detecting and reacting to inefficiencies in cryptocurrency markets in real time, including fee-aware profit calculation and automated execution logic.
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+Frontend runs on:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 📈 Example Output
+
+- Detects BTC price differences between exchanges
+- Simulates arbitrage execution
+- Updates wallet balances
+- Tracks cumulative profit
+- Visualizes trading activity in real time
+
+---
+
+## 🎯 Challenge Objectives Covered
+
+✅ Real-time exchange monitoring
+
+✅ Arbitrage opportunity detection
+
+✅ Fee-aware profitability analysis
+
+✅ Simulated trade execution
+
+✅ Wallet management
+
+✅ Historical trade tracking
+
+✅ Real-time dashboard
+
+✅ Data visualization
+
+✅ Full-stack architecture
+
+✅ Public deployment ready
+
+---
+
+## 🔮 Future Improvements
+
+- WebSocket market feeds
+- Order book depth analysis
+- Liquidity management
+- Partial order execution
+- Slippage estimation
+- Risk management module
+- Multi-exchange support
+- Advanced trading strategies
 
 ---
 
 ## 🧑‍💻 Author
 
-Built for Coding Challenge Mexico — Arbitrage Trading System
+**Lillys Hernández Ramos**
 
+Built for **Coding Challenge Mexico 2026**
+
+Bitcoin Arbitrage Trading System

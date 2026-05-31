@@ -18,20 +18,42 @@ def prices():
         "binance": get_binance_price(),
         "kraken": get_kraken_price()
     }
+
+
 @app.route("/api/arbitrage")
 def arbitrage():
-    data = get_arbitrage_opportunity()
+
+    binance = get_binance_price()
+    kraken = get_kraken_price()
+
+    prices = {
+        "binance": binance,
+        "kraken": kraken
+    }
+
+    data = get_arbitrage_opportunity(
+        binance,
+        kraken
+    )
 
     if data["opportunities"]:
-        best = max(data["opportunities"], key=lambda x: x["profit"])
+        best = max(
+            data["opportunities"],
+            key=lambda x: x["profit"]
+        )
+
         execution = execute_trade(best)
 
         return {
+            "prices": prices,
             "opportunity": best,
             "execution": execution
         }
 
-    return {"message": "No arbitrage"}
+    return {
+        "prices": prices,
+        "message": "No arbitrage"
+    }
 
 
 @app.route("/api/history")

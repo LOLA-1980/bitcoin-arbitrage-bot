@@ -22,14 +22,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchData()
-    const interval = setInterval(fetchData, 2000) // 👈 PERFECTO PARA DEMO
-    return () => clearInterval(interval)
+    //const interval = setInterval(fetchData, 3000)
+    //return () => clearInterval(interval)
   }, [])
 
   const execution = data?.execution
   const trade = execution?.trade_executed
   const wallet = execution?.wallet
   const opportunity = data?.opportunity
+  const prices = data?.prices
 
   if (loading) {
     return (
@@ -56,8 +57,33 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* CARDS */}
+      {/* WALLET CARDS */}
       <StatsCards wallet={wallet} trade={trade} />
+
+      {/* MARKET SNAPSHOT */}
+      <div className="grid grid-cols-2 gap-4 mb-6 mt-6">
+
+        <div className="bg-black border border-gray-800 p-4 rounded-xl">
+          <p className="text-gray-400 text-sm mb-1">
+            Binance BTC Price
+          </p>
+
+          <p className="text-2xl font-bold text-white">
+            ${prices?.binance?.price?.toFixed(2) || "Loading..."}
+          </p>
+        </div>
+
+        <div className="bg-black border border-gray-800 p-4 rounded-xl">
+          <p className="text-gray-400 text-sm mb-1">
+            Kraken BTC Price
+          </p>
+
+          <p className="text-2xl font-bold text-white">
+            ${prices?.kraken?.price?.toFixed(2) || "Loading..."}
+          </p>
+        </div>
+
+      </div>
 
       {/* OPPORTUNITIES */}
       <div className="mt-6">
@@ -66,12 +92,15 @@ export default function Dashboard() {
 
       {/* LAST TRADE */}
       <div className="bg-black border border-gray-800 p-4 rounded-xl mb-6 mt-6">
-        <h2 className="text-lg font-bold mb-2 text-white">Last Trade</h2>
+        <h2 className="text-lg font-bold mb-2 text-white">
+          Last Trade
+        </h2>
 
         {trade ? (
           <div className="space-y-1">
             <p>BUY → {trade.buy_exchange}</p>
             <p>SELL → {trade.sell_exchange}</p>
+
             <p className="text-green-400 font-bold">
               Profit: ${trade.profit}
             </p>
@@ -81,12 +110,12 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* CHART */}
+      {/* PROFIT CHART */}
       <div className="mt-6">
         <ProfitChart history={wallet?.history || []} />
       </div>
 
-      {/* HISTORY */}
+      {/* TRADE HISTORY */}
       <div className="mt-6">
         <TradeHistory history={wallet?.history || []} />
       </div>
