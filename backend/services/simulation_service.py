@@ -1,3 +1,5 @@
+from datetime import datetime
+
 wallet = {
     "usd": 10000,
     "btc": 1,
@@ -19,12 +21,16 @@ def execute_trade(opportunity):
         "buy_price": buy_price,
         "sell_price": sell_price,
         "amount_btc": amount_btc,
-        "profit": round(profit, 2)
+        "profit": round(profit, 2),
+        "timestamp": datetime.utcnow().isoformat()
     }
 
     wallet["usd"] += profit
     wallet["total_profit"] += profit
     wallet["history"].append(trade)
+
+    if len(wallet["history"]) > 100:
+        wallet["history"].pop(0)
 
     return {
         "trade_executed": trade,

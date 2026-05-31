@@ -8,16 +8,24 @@ import {
 } from "recharts"
 
 export default function ProfitChart({ history }) {
-  const data = history?.map((t, i) => ({
-    index: i + 1,
-    profit: t.profit,
-  })) || []
+
+  let cumulativeProfit = 0
+
+  const data =
+    history?.map((t, i) => {
+      cumulativeProfit += Number(t.profit)
+
+      return {
+        index: i + 1,
+        profit: cumulativeProfit,
+      }
+    }) || []
 
   return (
     <div className="bg-black border border-gray-800 p-4 rounded-xl mt-6">
 
       <h2 className="text-lg font-bold mb-4">
-        Profit Evolution 📈
+        Cumulative Profit 📈
       </h2>
 
       <div style={{ width: "100%", height: 250 }}>

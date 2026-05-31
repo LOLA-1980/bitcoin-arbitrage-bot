@@ -22,6 +22,9 @@ export default function TradeHistory({ history }) {
                 <p className="text-xs text-gray-400">
                   SELL → {t.sell_exchange}
                 </p>
+                <p className="text-xs text-gray-500">
+                    {new Date(t.timestamp).toLocaleString()}
+                </p>
               </div>
 
               <div className="text-right">

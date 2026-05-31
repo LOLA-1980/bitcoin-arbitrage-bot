@@ -29,6 +29,11 @@ Real-time Bitcoin arbitrage simulation platform that monitors multiple cryptocur
 
 ---
 
+## Supported Exchanges
+
+- Binance
+- Kraken
+
 ## 🟢 Live System Status
 
 | Component | Status |

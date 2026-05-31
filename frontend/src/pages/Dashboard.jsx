@@ -32,6 +32,14 @@ export default function Dashboard() {
   const opportunity = data?.opportunity
   const prices = data?.prices
 
+  const spread =
+    prices?.binance?.price && prices?.kraken?.price
+      ? Math.abs(
+          prices.binance.price - prices.kraken.price
+        ).toFixed(2)
+      : 0
+
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -61,7 +69,7 @@ export default function Dashboard() {
       <StatsCards wallet={wallet} trade={trade} />
 
       {/* MARKET SNAPSHOT */}
-      <div className="grid grid-cols-2 gap-4 mb-6 mt-6">
+      <div className="grid grid-cols-3 gap-4 mb-6 mt-6">
 
         <div className="bg-black border border-gray-800 p-4 rounded-xl">
           <p className="text-gray-400 text-sm mb-1">
@@ -80,6 +88,16 @@ export default function Dashboard() {
 
           <p className="text-2xl font-bold text-white">
             ${prices?.kraken?.price?.toFixed(2) || "Loading..."}
+          </p>
+        </div>
+
+         <div className="bg-black border border-gray-800 p-4 rounded-xl">
+          <p className="text-gray-400 text-sm mb-1">
+            Current Spread
+          </p>
+
+          <p className="text-2xl font-bold text-green-400">
+            ${spread}
           </p>
         </div>
 
