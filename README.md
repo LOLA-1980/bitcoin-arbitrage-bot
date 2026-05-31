@@ -10,7 +10,7 @@ Real-time Bitcoin arbitrage simulation platform that monitors multiple cryptocur
 
 ## 📸 Dashboard Preview
 
-![Dashboard Screenshot](./screenshots/dashboard.png)
+![Dashboard Screenshot](./screenshots/dashboard-overview.png)
 
 ---
 

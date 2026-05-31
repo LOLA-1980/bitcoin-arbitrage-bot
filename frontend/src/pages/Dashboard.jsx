@@ -22,8 +22,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchData()
-    //const interval = setInterval(fetchData, 3000)
-    //return () => clearInterval(interval)
+    const interval = setInterval(fetchData, 2000)
+    return () => clearInterval(interval)
   }, [])
 
   const execution = data?.execution
