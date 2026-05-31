@@ -5,6 +5,8 @@ from services.exchange_service import get_binance_price, get_kraken_price
 from services.arbitrage_service import get_arbitrage_opportunity
 from services.simulation_service import wallet, execute_trade
 
+import os
+
 app = Flask(__name__)
 CORS(app)
 
@@ -64,5 +66,7 @@ def history():
     }
 
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
