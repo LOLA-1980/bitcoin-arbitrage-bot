@@ -10,7 +10,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/arbitrage")
+      const res = await fetch("https://bitcoin-arbitrage-bot-production.up.railway.app/api/arbitrage")
       const json = await res.json()
       setData(json)
       setLoading(false)
