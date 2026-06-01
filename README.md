@@ -302,6 +302,11 @@ http://localhost:5173
 
 ---
 
+## Deployment Note
+
+Binance's public API may reject requests from certain cloud regions used by hosting providers. When this occurs, the application automatically falls back to simulated Binance market data based on real Kraken prices, allowing the arbitrage engine and dashboard to remain operational for evaluation purposes.
+
+
 ## 🧑‍💻 Author
 
 **Lillys Hernández Ramos**
