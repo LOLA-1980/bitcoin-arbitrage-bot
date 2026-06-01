@@ -304,7 +304,13 @@ http://localhost:5173
 
 ## Deployment Note
 
-Binance's public API may reject requests from certain cloud regions used by hosting providers. When this occurs, the application automatically falls back to simulated Binance market data based on real Kraken prices, allowing the arbitrage engine and dashboard to remain operational for evaluation purposes.
+Binance's public API may reject requests from certain cloud regions used by hosting providers. During production deployment, requests from the hosting environment were restricted by Binance's regional access policy.
+
+To ensure continuous operation of the arbitrage engine and allow full evaluation of the application, the system automatically falls back to simulated Binance market data derived from live Kraken market prices whenever Binance data is unavailable.
+
+Kraken market data remains sourced from the exchange's public API, while the fallback mechanism preserves the application's arbitrage detection, trade simulation, wallet management, profit calculation, and dashboard visualization capabilities.
+
+---
 
 
 ## 🧑‍💻 Author
