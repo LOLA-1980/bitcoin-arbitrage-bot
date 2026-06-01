@@ -6,6 +6,8 @@ def get_binance_price():
     response = requests.get(url)
     data = response.json()
 
+    print("BINANCE RESPONSE:", data)
+
     price = float(data["price"])
 
     # 👇 SIMULACIÓN ligera
